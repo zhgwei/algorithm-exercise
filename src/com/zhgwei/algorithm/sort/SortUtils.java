@@ -2,10 +2,11 @@ package com.zhgwei.algorithm.sort;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * TODO
+ * 排序工具类
  * @author zhgwei
  * @date 2020-09-14
  */
@@ -50,13 +51,19 @@ public class SortUtils {
     }
 
     /**
-     * 生成随机数组
-     * @return
+     * 生成随机数组, 数组最大长度 1000, 数值最大 1000
+     * @return 随机数组
      */
     public static int[] genIntRandomArray() {
         return genIntRandomArray(1000, 1000);
     }
 
+    /**
+     * 生成随机数组, 可以指定数组最大长度, 数值最大值
+     * @param maxLength 数组最大长度
+     * @param maxNum 数值最大值
+     * @return 随机数组
+     */
     public static int[] genIntRandomArray(int maxLength, int maxNum) {
         Random r = new Random();
 
@@ -84,5 +91,27 @@ public class SortUtils {
             }
         }
         return true;
+    }
+
+    public static boolean dataChecker(Sorter sorter, int num) {
+        boolean flag = true;
+        for (int i = 0; i< num && flag; i++) {
+            int[] arr = SortUtils.genIntRandomArray(1000, 1000);
+            int[] arrTest = Arrays.copyOf(arr, arr.length);
+
+            Arrays.sort(arr);
+            sorter.sort(arrTest);
+
+            flag = SortUtils.checkSame(arr, arrTest);
+        }
+        return true;
+    }
+
+    /**
+     * 排序算法 lambda 接口
+     */
+    @FunctionalInterface
+    public interface Sorter {
+        void sort(int[] arr);
     }
 }

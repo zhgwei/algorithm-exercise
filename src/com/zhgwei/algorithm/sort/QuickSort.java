@@ -61,22 +61,6 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        boolean flag = true;
-        for (int i = 0; i< 50000; i++) {
-            int[] arr = SortUtils.genIntRandomArray(1000, 1000);
-            int[] arrTest = Arrays.copyOf(arr, arr.length);
-
-            Arrays.sort(arr);
-            sort(arrTest);
-
-            flag = SortUtils.checkSame(arr, arrTest);
-            if (!flag) {
-                System.out.println("failed");
-                break;
-            }
-        }
-        if (flag) {
-            System.out.println("success");
-        }
+        System.out.println(SortUtils.dataChecker(QuickSort::sort, 100_000));
     }
 }

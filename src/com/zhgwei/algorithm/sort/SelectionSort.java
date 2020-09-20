@@ -1,6 +1,7 @@
 package com.zhgwei.algorithm.sort;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * 选择排序 O(n^2)
@@ -21,6 +22,10 @@ public class SelectionSort {
         }
     }
 
+    /**
+     * 选择排序优化版本, 同时记录最大值和最小值, 最小值与第一个数交换, 最大值与最后一个数交换
+     * @param arr
+     */
     public static void sortOpt(int[] arr) {
         int len = arr.length;
         for (int i = 0; i < len/2; i++) {
@@ -35,30 +40,15 @@ public class SelectionSort {
                 }
             }
             SortUtils.swap(arr, i, mini);
+            // 注意在最大值交换前有可能已经被最小值交换
             if (maxi == i) {
                 maxi = mini;
             }
-            SortUtils.swap(arr, len -1 - i, maxi);
+            SortUtils.swap(arr, len-1 - i, maxi);
         }
     }
 
     public static void main(String[] args) {
-        boolean flag = true;
-        for (int i = 0; i< 50000; i++) {
-            int[] arr = SortUtils.genIntRandomArray();
-            int[] arrTest = Arrays.copyOf(arr, arr.length);
-
-            Arrays.sort(arr);
-            sortOpt(arrTest);
-
-            flag = SortUtils.checkSame(arr, arrTest);
-            if (!flag) {
-                System.out.println("failed");
-                break;
-            }
-        }
-        if (flag) {
-            System.out.println("success");
-        }
+        System.out.println(SortUtils.dataChecker(SelectionSort::sort, 5000));
     }
 }

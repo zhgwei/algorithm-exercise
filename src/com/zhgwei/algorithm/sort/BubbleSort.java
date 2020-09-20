@@ -3,7 +3,7 @@ package com.zhgwei.algorithm.sort;
 import java.util.Arrays;
 
 /**
- * TODO
+ * 冒泡排序, 时间复杂度 O(n^2), 最好 O(n), 空间复杂度 O(1)
  * @author zhgwei
  * @date 2020-09-14
  */
@@ -24,22 +24,6 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
-        boolean flag = true;
-        for (int i = 0; i< 50000; i++) {
-            int[] arr = SortUtils.genIntRandomArray();
-            int[] arrTest = Arrays.copyOf(arr, arr.length);
-
-            Arrays.sort(arr);
-            sort(arrTest);
-
-            flag = SortUtils.checkSame(arr, arrTest);
-            if (!flag) {
-                System.out.println("failed");
-                break;
-            }
-        }
-        if (flag) {
-            System.out.println("success");
-        }
+        System.out.println(SortUtils.dataChecker(BubbleSort::sort, 100_000));
     }
 }
